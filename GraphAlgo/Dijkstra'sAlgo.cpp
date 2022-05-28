@@ -10,6 +10,18 @@ int minDistance(vector<int>&dist,vector<bool>&vis){
     }
     return ind;
 }
+void dijkstra(vector<pair<int,pair<int,int>>> &g,vector<bool> &vis,vector<int> &dis,int n){
+        // Dijkstra's ALgo.
+    	for(int i=0;i<n;i++){
+            int m=minDistance(dis,vis);
+            vis[m]=true;
+            for(int i=0;i<g.size();i++){
+                if(g[i].second.first==m){
+                    dis[g[i].second.second]=min(dis[g[i].second.second], dis[m]+g[i].first);
+                }
+            }
+        }
+}
 int main(){
     int t; cin>>t;
     while(t--){
@@ -23,17 +35,8 @@ int main(){
         }
         vector<bool> vis(n,false); vector<int> dis(n,INT_MAX);
     	dis[0]=0;
-        
-        // Dijkstra's ALgo.
-    	for(int i=0;i<e;i++){
-            int m=minDistance(dis,vis);
-            vis[m]=true;
-            for(int i=0;i<g.size();i++){
-                if(g[i].second.first==m){
-                    dis[g[i].second.second]=min(dis[g[i].second.second], dis[m]+g[i].first);
-                }
-            }
-        }
+        dijkstra(g,vis,dis,n);
+
         for(int i=0;i<n;i++) cout<<i<<" "<<dis[i]<<endl;
     }
     
