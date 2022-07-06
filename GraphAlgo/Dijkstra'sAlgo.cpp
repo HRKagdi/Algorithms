@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 int minDistance(vector<int>&dist,vector<bool>&vis){
-    int minDist=INT_MAX; int ind=0;
+    int minDist=INT_MAX; int ind=-1;
     for(int i=0;i<dist.size();i++){
         if(!vis[i] && minDist>dist[i]){
             minDist=dist[i];
@@ -14,6 +14,7 @@ void dijkstra(vector<pair<int,pair<int,int>>> &g,vector<bool> &vis,vector<int> &
         // Dijkstra's ALgo.
     	for(int i=0;i<n;i++){
             int m=minDistance(dis,vis);
+            if(m==-1) continue;
             vis[m]=true;
             for(int i=0;i<g.size();i++){
                 if(g[i].second.first==m){
